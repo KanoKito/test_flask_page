@@ -29,7 +29,7 @@ class User(UserMixin):
         self.password_hash = password_hash
 
 
-# "База данных" пользователей (в реальном приложении используйте БД)
+# "База данных" пользователей
 users_db = {
     1: User(1, 'admin', generate_password_hash('password123')),
     2: User(2, 'user', generate_password_hash('123456')),
@@ -54,12 +54,11 @@ def load_user(user_id):
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    return redirect(url_for('login'))
+    return render_template('index.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # Если пользователь уже авторизован, перенаправляем на главную
     if current_user.is_authenticated:
         return redirect(url_for('home'))
 
@@ -90,7 +89,7 @@ def home():
 def logout():
     logout_user()
     flash('Вы успешно вышли из системы', 'success')
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 
 @app.errorhandler(401)

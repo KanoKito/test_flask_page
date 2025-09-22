@@ -3,22 +3,29 @@
 {% block title %}Вход в систему{% endblock %}
 
 {% block content %}
-<h2>Вход в систему</h2>
+<div class="welcome-header">
+    <h2>🔐 Авторизация</h2>
+    <p>Введите ваши учетные данные</p>
+</div>
 
 <form method="POST">
     <div class="form-group">
-        <input type="text" name="username" placeholder="Имя пользователя" required
+        <input type="text" name="username" placeholder="👤 Имя пользователя" required
                value="{{ request.form.username if request.form.username }}">
     </div>
     <div class="form-group">
-        <input type="password" name="password" placeholder="Пароль" required>
+        <input type="password" name="password" placeholder="🔒 Пароль" required>
     </div>
-    <button type="submit" class="btn">Войти</button>
+    <button type="submit" class="btn btn-primary">Войти в систему</button>
 </form>
 
 <div class="test-users">
     <p><strong>Тестовые пользователи:</strong></p>
-    <p>admin / password123</p>
-    <p>user / 123456</p>
+    <p>👤 admin / 🔑 password123</p>
+    <p>👤 user / 🔑 123456</p>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{{ url_for('index') }}">← Назад на главную</a>
 </div>
 {% endblock %}
